@@ -12,7 +12,10 @@ Public Class Form1
             Dim command As New SqlCommand("SELECT * FROM SystemSettings where SettingID=2", conn)
             Using reader As SqlDataReader = command.ExecuteReader()
                 reader.Read()
-                lbFirst.Text = reader.Item(1)
+                Dim settingStr = reader.Item(1)
+                If (settingStr = "0") Then
+                    lbFirst.Text = reader.Item(2)
+                End If
                 ' End While
             End Using
         End Using
