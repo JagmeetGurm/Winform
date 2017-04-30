@@ -9,7 +9,9 @@ Public Class Form1
         Using conn As New SqlConnection(connectionString)
             conn.Open()
             'query
-            Dim command As New SqlCommand("SELECT * FROM SystemSettings where SettingID=2", conn)
+            Dim command As New SqlCommand("SELECT * FROM SystemSettings where SettingID=@SettingIDValue", conn)
+            command.Parameters.Add(New SqlParameter("SettingIDValue", 2))
+            ' Dim command As New SqlCommand("select * from SystemSettings where SettingID=2", conn)
             Using reader As SqlDataReader = command.ExecuteReader()
                 reader.Read()
                 Dim settingStr = reader.Item(1)
